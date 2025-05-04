@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,9 +36,11 @@
   <h1>Nabil's Live TV</h1>
   <div id="video-container">
     <video id="video" controls autoplay></video>
-  </div>  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.8.1/shaka-player.compiled.js"></script>  <script>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.8.1/shaka-player.compiled.js"></script>
+  <script>
     async function initPlayer() {
-      const manifestUri = "https://ssc-1-enc.edgenextcdn.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd";
+      const manifestUri = "https://ssc-1-enc.edgenextcdn.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd?drmScheme=clearkey&drmLicense=d84c325f36814f39bbe59080272b10c3:550727de4c96ef1ecff874905493580f";
 
       shaka.polyfill.installAll();
       if (shaka.Player.isBrowserSupported()) {
@@ -64,5 +67,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', initPlayer);
-  </script></body>
+  </script>
+</body>
 </html>
