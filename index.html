@@ -1,72 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nabil's Live TV</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: black;
-      color: white;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    h1 {
-      margin-bottom: 20px;
-      font-size: 2em;
-    }
-    #video-container {
-      width: 90%;
-      max-width: 1000px;
-      aspect-ratio: 16 / 9;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      background: black;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabil's Live TV</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        #video-container {
+            width: 90%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+    </style>
 </head>
 <body>
-  <h1>Nabil's Live TV</h1>
-  <div id="video-container">
-    <video id="video" controls autoplay></video>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.8.1/shaka-player.compiled.js"></script>
-  <script>
-    async function initPlayer() {
-      const manifestUri = "https://ssc-1-enc.edgenextcdn.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd?drmScheme=clearkey&drmLicense=d84c325f36814f39bbe59080272b10c3:550727de4c96ef1ecff874905493580f";
+    <h1>Nabil's Live TV</h1>
+    <div id="video-container">
+        <video id="video" controls autoplay></video>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.8.1/shaka-player.compiled.js"></script>
+    <script>
+        async function initPlayer() {
+            const manifestUri = "https://www.w3schools.com/html/movie.mp4"; // Use a non-DRM video URL for testing
+            shaka.polyfill.installAll();
+            if (shaka.Player.isBrowserSupported()) {
+                const video = document.getElementById('video');
+                const player = new shaka.Player(video);
 
-      shaka.polyfill.installAll();
-      if (shaka.Player.isBrowserSupported()) {
-        const video = document.getElementById('video');
-        const player = new shaka.Player(video);
-
-        player.configure({
-          drm: {
-            clearKeys: {
-              'd84c325f36814f39bbe59080272b10c3': '550727de4c96ef1ecff874905493580f'
+                try {
+                    await player.load(manifestUri);
+                    console.log('Video loaded successfully');
+                } catch (e) {
+                    console.error('Error loading video:', e);
+                }
+            } else {
+                alert('Browser not supported');
             }
-          }
-        });
-
-        try {
-          await player.load(manifestUri);
-          console.log('Video loaded successfully');
-        } catch (e) {
-          console.error('Error loading video:', e);
         }
-      } else {
-        alert('Browser not supported');
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', initPlayer);
-  </script>
+        document.addEventListener('DOMContentLoaded', initPlayer);
+    </script>
 </body>
 </html>
